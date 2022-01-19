@@ -45,10 +45,10 @@ public class SpawnManager : MonoBehaviour
     //randomise spawn positions between 4 arena corners
     private Vector3 GenerateEnemySpawnLocation()
     {
-        Vector3 posTopLeft = new Vector3(-8.0f, player.transform.position.y, 8.0f);
-        Vector3 posTopRight = new Vector3(8.0f, player.transform.position.y, 8.0f);
-        Vector3 posBottomLeft = new Vector3(-8.0f, player.transform.position.y, -8.0f);
-        Vector3 posBottomRight = new Vector3(8.0f, player.transform.position.y, -8.0f);
+        Vector3 posTopLeft = new Vector3(-8.0f, 4.0f, 8.0f);
+        Vector3 posTopRight = new Vector3(8.0f, 4.0f, 8.0f);
+        Vector3 posBottomLeft = new Vector3(-8.0f, 4.0f, -8.0f);
+        Vector3 posBottomRight = new Vector3(8.0f, 4.0f, -8.0f);
 
         Vector3[] posArray = { posTopLeft, posTopRight, posBottomLeft, posBottomRight };
 

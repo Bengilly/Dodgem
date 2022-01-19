@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public AudioClip highscoreAudio;
     public AudioClip deathAudio;
     public AudioClip pickupAudio;
+    public AudioClip gameMusic;
     public bool isGameActive = false;
 
     private AudioSource audioSource;
@@ -45,6 +46,7 @@ public class GameManager : MonoBehaviour
         quitButton.onClick.AddListener(QuitGame);
 
         audioSource = GetComponent<AudioSource>();
+        audioSource.Play();
     }
 
     // Update is called once per frame
@@ -85,6 +87,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+
         gameScreen.gameObject.SetActive(true);
         titleScreen.gameObject.SetActive(false);
 
