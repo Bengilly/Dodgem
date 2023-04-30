@@ -60,8 +60,8 @@ public class SpawnManager : MonoBehaviour
     //spawn pickups
     private void SpawnPickup()
     {
-        ScorePickupCount = FindObjectsOfType<ScorePickup>().Length;
-        BonusPickupCount = FindObjectsOfType<Powerup>().Length + FindObjectsOfType<Nuke>().Length + FindObjectsOfType<SlowMo>().Length;
+        ScorePickupCount = FindObjectsOfType<Pickup_Score>().Length;
+        BonusPickupCount = FindObjectsOfType<Pickup_Shield>().Length + FindObjectsOfType<Pickup_Nuke>().Length + FindObjectsOfType<Pickup_SlowMo>().Length;
 
         if (ScorePickupCount == 0 && gameManager.isGameActive == true)
         {

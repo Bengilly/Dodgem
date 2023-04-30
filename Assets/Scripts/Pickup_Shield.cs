@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Powerup : PickupObject
+public class Pickup_Shield : PickupObject
 {
     private SpawnManager spawnManager;
     private PlayerController player;
     private AudioSource audioSource;
+    private float powerupStrength = 5.0f;
 
     public AudioClip powerupAudio;
-
-    private float powerupStrength = 5.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +22,7 @@ public class Powerup : PickupObject
 
     public override void CollectPickup()
     {
-        //play bomb audio
+        //play shield audio
         audioSource.PlayOneShot(powerupAudio, 0.3f);
 
         gameObject.GetComponent<MeshRenderer>().enabled = false;

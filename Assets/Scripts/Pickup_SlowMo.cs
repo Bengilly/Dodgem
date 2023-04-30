@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlowMo : PickupObject
+public class Pickup_SlowMo : PickupObject
 {
     private AudioSource audioSource;
 
@@ -50,4 +50,5 @@ public class SlowMo : PickupObject
         Time.timeScale = 1;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
     }
+
 }

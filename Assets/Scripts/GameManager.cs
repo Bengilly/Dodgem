@@ -17,18 +17,19 @@ public class GameManager : MonoBehaviour
     public AudioClip highscoreAudio;
     public AudioClip deathAudio;
     public AudioClip pickupAudio;
-    public AudioClip gameMusic;
+    //public AudioClip gameMusic;
     public bool isGameActive = false;
 
-    private AudioSource audioSource;
+    public AudioSource audioSource;
+    private VolumeSliderController volumeSlider;
     private Button startButton;
     private Button restartButton;
     private Button optionsButton;
     private Button returnButton;
     private Button resetButton;
+    private Button saveButton;
     private Button quitButton;
     private int score;
-
 
 
     // Start is called before the first frame update
@@ -47,12 +48,16 @@ public class GameManager : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
         audioSource.Play();
+
+        volumeSlider = GetComponent<VolumeSliderController>();
+        audioSource.volume = volumeSlider.GetVolume();
+        Debug.Log(audioSource.volume);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        audioSource.volume = volumeSlider.volumeValue/10;
     }
 
     //updates score value and displays it on the UI
@@ -109,6 +114,10 @@ public class GameManager : MonoBehaviour
 
         returnButton = GameObject.Find("ReturnButton").GetComponent<Button>();
         returnButton.onClick.AddListener(TitleScreen);
+
+       saveButton = GameObject.Find("SaveButton").GetComponent<Button>();
+       saveButton.onClick.AddListener(SaveButton);
+
     }
 
     //load title screen
@@ -116,6 +125,12 @@ public class GameManager : MonoBehaviour
     {
         titleScreen.gameObject.SetActive(true);
         optionsScreen.gameObject.SetActive(false);
+    }
+    
+    private void SaveButton()
+    {
+        volumeSlider.SaveVolume(volumeSlider.volumeValue);
+        audioSource.volume = volumeSlider.GetVolume();
     }
 
     private void QuitGame()

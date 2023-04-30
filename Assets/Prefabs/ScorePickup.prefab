@@ -130,6 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91ea799afada04f4c8210d4cd8a233d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreParticle: {fileID: 19800006, guid: 8fc06027b01064e4f885fd8dd2929310, type: 3}
+  ant: {fileID: 100002, guid: 595cf544943e29a4d9a7b813e4218a3c, type: 3}
 --- !u!108 &108233684545522872
 Light:
   m_ObjectHideFlags: 0

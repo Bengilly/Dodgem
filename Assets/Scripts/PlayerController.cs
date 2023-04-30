@@ -7,27 +7,25 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     public CharacterController controller;
-    public ParticleSystem pickupParticle;
     public ParticleSystem deathParticle;
+    public ParticleSystem scoreParticle;
     public GameObject powerupIndicator;
-
     public float turnSmoothTime = 0.1f;
     public bool hasPowerup = false;
+    public float playerSpeed = 10.0f;
+    public bool slowMoActive = false;
 
     private GameManager gameManager;
-    private Nuke nukePickup;
-    private Powerup powerup;
-    private SlowMo slowMoPickup;
-
+    private Pickup_Nuke nukePickup;
+    private Pickup_Shield shieldPickup;
+    private Pickup_SlowMo slowMoPickup;
     private Vector3 lookDirection;
-    public float playerSpeed = 10.0f;
     private float gameBoundaries = 9.3f;
     private float horizontalInput;
     private float verticalInput;
     private float turnSmoothVelocity;
     private float gravityForce = -9.3f;
     private int score = 1;
-    private bool slowMoActive = false;
 
     Animator anim;
 
@@ -92,7 +90,8 @@ public class PlayerController : MonoBehaviour
     {
         if (collider.gameObject.CompareTag("ScorePickup"))
         {
-            Instantiate(pickupParticle, transform.position, pickupParticle.transform.rotation);
+
+            Instantiate(scoreParticle, transform.position, scoreParticle.transform.rotation);
 
             StartCoroutine(ScorePickupCountdownRoutine());
             Destroy(collider.gameObject);
@@ -101,8 +100,8 @@ public class PlayerController : MonoBehaviour
 
         if (collider.gameObject.CompareTag("Powerup"))
         {
-            powerup = GameObject.FindWithTag("Powerup").GetComponent<Powerup>();
-            powerup.CollectPickup();
+            shieldPickup = GameObject.FindWithTag("Powerup").GetComponent<Pickup_Shield>();
+            shieldPickup.CollectPickup();
 
             hasPowerup = true;
             powerupIndicator.gameObject.SetActive(true);
@@ -111,20 +110,20 @@ public class PlayerController : MonoBehaviour
 
         if (collider.gameObject.CompareTag("Nuke"))
         {
-            nukePickup = GameObject.FindWithTag("Nuke").GetComponent<Nuke>();
+            nukePickup = GameObject.FindWithTag("Nuke").GetComponent<Pickup_Nuke>();
             nukePickup.CollectPickup();
         }
 
         if (collider.gameObject.CompareTag("SlowMo"))
         {
-            slowMoPickup = GameObject.FindWithTag("SlowMo").GetComponent<SlowMo>();
+            slowMoPickup = GameObject.FindWithTag("SlowMo").GetComponent<Pickup_SlowMo>();
 
             StartCoroutine(SlowMoCountDownRoutine());
             slowMoPickup.CollectPickup();
         }
     }
 
-    //score coroutine to give player a speed boost when they collect score pickup
+    //Score coroutine to give player a speed boost when they collect score pickup
     IEnumerator ScorePickupCountdownRoutine()
     {
         if (slowMoActive == true)
@@ -146,7 +145,7 @@ public class PlayerController : MonoBehaviour
         {
             playerSpeed = 10.0f;
         }
-        
+
     }
 
     //powerup coroutine to disable powerup after 3 seconds
@@ -168,10 +167,8 @@ public class PlayerController : MonoBehaviour
         slowMoActive = false;
         playerSpeed = 10.0f;
         slowMoPickup.NormalSpeed();
-
-
     }
-    
+
     //checks collisions between player and other objects
     private void OnCollisionEnter(Collision collision)
     {

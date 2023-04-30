@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Nuke : PickupObject
+public class Pickup_Nuke : PickupObject
 {
     public ParticleSystem deathParticle;
     public AudioClip nukeAudio;
