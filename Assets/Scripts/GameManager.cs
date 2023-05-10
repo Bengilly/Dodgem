@@ -4,13 +4,16 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highscoreText;
     public TextMeshProUGUI highscoreTextGameOver;
+    public TextMeshProUGUI shopPoints;
     public GameObject gameScreen;
+    public GameObject shopScreen;
     public GameObject titleScreen;
     public GameObject gameOverScreen;
     public GameObject optionsScreen;
@@ -20,9 +23,10 @@ public class GameManager : MonoBehaviour
     //public AudioClip gameMusic;
     public bool isGameActive = false;
 
-    public AudioSource audioSource;
+    private AudioSource audioSource;
     private VolumeSliderController volumeSlider;
     private Button startButton;
+    private Button shopButton;
     private Button restartButton;
     private Button optionsButton;
     private Button returnButton;
@@ -31,7 +35,10 @@ public class GameManager : MonoBehaviour
     private Button quitButton;
     private int score;
 
-
+    private void Awake()
+    {
+        
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -52,12 +59,15 @@ public class GameManager : MonoBehaviour
         volumeSlider = GetComponent<VolumeSliderController>();
         audioSource.volume = volumeSlider.GetVolume();
         Debug.Log(audioSource.volume);
+
+        shopButton = GameObject.Find("ShopButton").GetComponent<Button>();
+        shopButton.onClick.AddListener(StoreScreen);
     }
 
     // Update is called once per frame
     void Update()
     {
-        audioSource.volume = volumeSlider.volumeValue/10;
+        
     }
 
     //updates score value and displays it on the UI
@@ -82,15 +92,27 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         audioSource.PlayOneShot(deathAudio, 0.5f);
+        gameScreen.gameObject.SetActive(false);
         gameOverScreen.gameObject.SetActive(true);
         isGameActive = false;
 
         restartButton = GameObject.Find("RestartButton").GetComponent<Button>();
         restartButton.onClick.AddListener(RestartGame);
         highscoreTextGameOver.text = "Highscore: " + PlayerPrefs.GetInt("Highscore", 0).ToString();
+
+        CalculateShopPoints();
     }
 
-    public void StartGame()
+    //calculate shop points by adding score to current points stored
+    private void CalculateShopPoints()
+    {
+        int playerPoints;
+        playerPoints = (PlayerPrefs.GetInt("ShopPoints", 0) + score);
+        shopPoints.text = "Shop Points: " + playerPoints;
+        PlayerPrefs.SetInt("ShopPoints", playerPoints);
+    }
+
+    private void StartGame()
     {
 
         gameScreen.gameObject.SetActive(true);
@@ -112,12 +134,11 @@ public class GameManager : MonoBehaviour
         resetButton = GameObject.Find("ResetHighscores").GetComponent<Button>();
         resetButton.onClick.AddListener(ResetScore);
 
-        returnButton = GameObject.Find("ReturnButton").GetComponent<Button>();
+        returnButton = GameObject.Find("OptionsReturnButton").GetComponent<Button>();
         returnButton.onClick.AddListener(TitleScreen);
 
        saveButton = GameObject.Find("SaveButton").GetComponent<Button>();
-       saveButton.onClick.AddListener(SaveButton);
-
+       saveButton.onClick.AddListener(SaveButton); 
     }
 
     //load title screen
@@ -125,12 +146,21 @@ public class GameManager : MonoBehaviour
     {
         titleScreen.gameObject.SetActive(true);
         optionsScreen.gameObject.SetActive(false);
+        shopScreen.gameObject.SetActive(false);
+    }
+
+    private void StoreScreen()
+    {
+        shopScreen.gameObject.SetActive(true);
+        titleScreen.gameObject.SetActive(false);
+
+        returnButton = GameObject.Find("ShopReturnButton").GetComponent<Button>();
+        returnButton.onClick.AddListener(TitleScreen);
     }
     
     private void SaveButton()
     {
         volumeSlider.SaveVolume(volumeSlider.volumeValue);
-        audioSource.volume = volumeSlider.GetVolume();
     }
 
     private void QuitGame()
@@ -138,14 +168,19 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void ResetScore()
+    private void ResetScore()
     {
         PlayerPrefs.DeleteKey("Highscore");
         highscoreText.text = "0";
     }
 
-    public void RestartGame()
+    private void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
+    public void UpdateVolume()
+    {
+        audioSource.volume = volumeSlider.volumeValue / 10;
     }
 }
