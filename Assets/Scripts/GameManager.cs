@@ -58,7 +58,6 @@ public class GameManager : MonoBehaviour
 
         volumeSlider = GetComponent<VolumeSliderController>();
         audioSource.volume = volumeSlider.GetVolume();
-        Debug.Log(audioSource.volume);
 
         shopButton = GameObject.Find("ShopButton").GetComponent<Button>();
         shopButton.onClick.AddListener(StoreScreen);

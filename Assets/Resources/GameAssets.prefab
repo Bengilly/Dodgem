@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3195105359787943067
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2451189790960577866}
+  - component: {fileID: -1497299695766259202}
+  m_Layer: 0
+  m_Name: GameAssets
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2451189790960577866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3195105359787943067}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 222.76605, y: 317.56845, z: -115.72557}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1497299695766259202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3195105359787943067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05774929562a4174d8d63337c47f7cb2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cat: {fileID: 21300000, guid: c6f642a9b13c45b4690ec6e2a5831a6e, type: 3}
+  chicken: {fileID: 21300000, guid: af1ca0594b085c144bb82e4824c5e875, type: 3}
+  dog: {fileID: 21300000, guid: 6296fd0df83b0924791d2f6885f2a078, type: 3}
+  lion: {fileID: 21300000, guid: 1f76b1781d90738419328507932e76c2, type: 3}
+  penguin: {fileID: 21300000, guid: 34d0efb908bdbaf4ca4c50e7906020dc, type: 3}
