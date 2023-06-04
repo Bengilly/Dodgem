@@ -10,24 +10,27 @@ public class UI_Shop : MonoBehaviour
 {
     private Transform container;
     private Transform shopItemTemplate;
+    private IShopPurchaser shopPurchaser;
+    private Button buyButton;
 
     private void Awake()
     {
         container = transform.Find("ShopContainer");
         shopItemTemplate = container.Find("ShopItemTemplate");
-        //shopItemTemplate.Find("ItemImageTest").GetComponent<Image>().sprite = Resources.Load<Sprite>(@"/Sprites/caticon");
-        shopItemTemplate.gameObject.SetActive(false);
 
+        shopItemTemplate.gameObject.SetActive(false);
     }
 
     private void Start()
     {
+        //set player as shopPurchaser to buy characters
+        shopPurchaser = GameObject.Find("Player").GetComponent<PlayerController>();
 
         CreateItemButton(UI_ShopItem.Item.Cat, UI_ShopItem.GetSprite(UI_ShopItem.Item.Cat), "Cat", UI_ShopItem.GetPrice(UI_ShopItem.Item.Cat), 0);
-        CreateItemButton(UI_ShopItem.Item.Cat, UI_ShopItem.GetSprite(UI_ShopItem.Item.Chicken), "Chicken", UI_ShopItem.GetPrice(UI_ShopItem.Item.Chicken), 1);
-        CreateItemButton(UI_ShopItem.Item.Cat, UI_ShopItem.GetSprite(UI_ShopItem.Item.Dog), "Dog", UI_ShopItem.GetPrice(UI_ShopItem.Item.Dog), 2);
-        CreateItemButton(UI_ShopItem.Item.Cat, UI_ShopItem.GetSprite(UI_ShopItem.Item.Lion), "Lion", UI_ShopItem.GetPrice(UI_ShopItem.Item.Lion), 3);
-        CreateItemButton(UI_ShopItem.Item.Cat, UI_ShopItem.GetSprite(UI_ShopItem.Item.Penguin), "Penguin", UI_ShopItem.GetPrice(UI_ShopItem.Item.Penguin), 4);
+        CreateItemButton(UI_ShopItem.Item.Chicken, UI_ShopItem.GetSprite(UI_ShopItem.Item.Chicken), "Chicken", UI_ShopItem.GetPrice(UI_ShopItem.Item.Chicken), 1);
+        CreateItemButton(UI_ShopItem.Item.Dog, UI_ShopItem.GetSprite(UI_ShopItem.Item.Dog), "Dog", UI_ShopItem.GetPrice(UI_ShopItem.Item.Dog), 2);
+        CreateItemButton(UI_ShopItem.Item.Lion, UI_ShopItem.GetSprite(UI_ShopItem.Item.Lion), "Lion", UI_ShopItem.GetPrice(UI_ShopItem.Item.Lion), 3);
+        CreateItemButton(UI_ShopItem.Item.Penguin, UI_ShopItem.GetSprite(UI_ShopItem.Item.Penguin), "Penguin", UI_ShopItem.GetPrice(UI_ShopItem.Item.Penguin), 4);
 
     }
 
@@ -43,14 +46,18 @@ public class UI_Shop : MonoBehaviour
         shopItemTransform.Find("ItemText").GetComponent<TextMeshProUGUI>().SetText(itemName);
         shopItemTransform.Find("BuyButton").Find("BuyAmount").GetComponent<TextMeshProUGUI>().SetText(itemPrice.ToString());
         shopItemTransform.Find("ItemImage").GetComponent<Image>().sprite = itemSprite;
-        Debug.Log(itemSprite);
 
-        shopItemTransform.Find("BuyButton").Find("BuyAmount").GetComponent<Button>().onClick.AddListener(TryBuyItem(item));
-
+        buyButton = shopItemTransform.Find("BuyButton").GetComponent<Button>();
+        buyButton.onClick.AddListener(() => { TryBuyItem(item); });
     }
 
-    private UnityAction TryBuyItem(UI_ShopItem.Item item)
+    private void TryBuyItem(UI_ShopItem.Item item)
     {
-        throw new NotImplementedException();
+        if(shopPurchaser.CanBuyItem(UI_ShopItem.GetPrice(item)))
+        {
+            shopPurchaser.BoughtItem(item);
+        }
+
+        
     }
 } 

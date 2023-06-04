@@ -49,3 +49,35 @@ MonoBehaviour:
   dog: {fileID: 21300000, guid: 6296fd0df83b0924791d2f6885f2a078, type: 3}
   lion: {fileID: 21300000, guid: 1f76b1781d90738419328507932e76c2, type: 3}
   penguin: {fileID: 21300000, guid: 34d0efb908bdbaf4ca4c50e7906020dc, type: 3}
+  catBody: {fileID: 3300000, guid: 99c74493bf8e38f4898ddecbf36b4291, type: 3}
+  catHead: {fileID: 3300002, guid: 99c74493bf8e38f4898ddecbf36b4291, type: 3}
+  catLegBL: {fileID: 3300004, guid: 99c74493bf8e38f4898ddecbf36b4291, type: 3}
+  catLegBR: {fileID: 3300006, guid: 99c74493bf8e38f4898ddecbf36b4291, type: 3}
+  catLegFL: {fileID: 3300008, guid: 99c74493bf8e38f4898ddecbf36b4291, type: 3}
+  catLegFR: {fileID: 3300010, guid: 99c74493bf8e38f4898ddecbf36b4291, type: 3}
+  chickenBody: {fileID: 3300000, guid: a781aa61e9361024cac36d44dda87c3a, type: 3}
+  chickenHead: {fileID: 3300002, guid: a781aa61e9361024cac36d44dda87c3a, type: 3}
+  chickenLegL: {fileID: 3300004, guid: a781aa61e9361024cac36d44dda87c3a, type: 3}
+  chickenLegR: {fileID: 3300006, guid: a781aa61e9361024cac36d44dda87c3a, type: 3}
+  dogBody: {fileID: 3300000, guid: 23087f4be52d60c488a49d499dfc98fb, type: 3}
+  dogHead: {fileID: 3300004, guid: 23087f4be52d60c488a49d499dfc98fb, type: 3}
+  dogLegBL: {fileID: 3300008, guid: 23087f4be52d60c488a49d499dfc98fb, type: 3}
+  dogLegBR: {fileID: 3300010, guid: 23087f4be52d60c488a49d499dfc98fb, type: 3}
+  dogLegFL: {fileID: 3300012, guid: 23087f4be52d60c488a49d499dfc98fb, type: 3}
+  dogLegFR: {fileID: 3300006, guid: 23087f4be52d60c488a49d499dfc98fb, type: 3}
+  dogTail: {fileID: 3300014, guid: 23087f4be52d60c488a49d499dfc98fb, type: 3}
+  lionBody: {fileID: 3300000, guid: 81ce4a7ffd46313429701ca47e11a638, type: 3}
+  lionHead: {fileID: 3300002, guid: 81ce4a7ffd46313429701ca47e11a638, type: 3}
+  lionLegBL: {fileID: 3300004, guid: 81ce4a7ffd46313429701ca47e11a638, type: 3}
+  lionLegBR: {fileID: 3300006, guid: 81ce4a7ffd46313429701ca47e11a638, type: 3}
+  lionLegFL: {fileID: 3300008, guid: 81ce4a7ffd46313429701ca47e11a638, type: 3}
+  lionLegFR: {fileID: 3300010, guid: 81ce4a7ffd46313429701ca47e11a638, type: 3}
+  lionTail: {fileID: 3300012, guid: 81ce4a7ffd46313429701ca47e11a638, type: 3}
+  penguinBody: {fileID: 3300000, guid: 4265787259ee6f846a16b2b460d9bb8a, type: 3}
+  penguinWingL: {fileID: 3300002, guid: 4265787259ee6f846a16b2b460d9bb8a, type: 3}
+  penguinWingR: {fileID: 3300004, guid: 4265787259ee6f846a16b2b460d9bb8a, type: 3}
+  animatorChicken: {fileID: 9100000, guid: da87f0caf717cb746a640124438be23c, type: 2}
+  animatorCat: {fileID: 9100000, guid: 93e3c2b08cdddef48a084d8def08276c, type: 2}
+  animatorDog: {fileID: 9100000, guid: dc00d5be66d564c4e8c04169b129bf86, type: 2}
+  animatorLion: {fileID: 9100000, guid: 73250dbd466b1b34faff07c645e547e8, type: 2}
+  animatorPenguin: {fileID: 9100000, guid: 7051da3a23832c84a8a2cebba41c6433, type: 2}

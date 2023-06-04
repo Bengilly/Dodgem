@@ -8,10 +8,10 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-    public TextMeshProUGUI scoreText;
-    public TextMeshProUGUI highscoreText;
-    public TextMeshProUGUI highscoreTextGameOver;
-    public TextMeshProUGUI shopPoints;
+    public TextMeshProUGUI scoreTextUI;
+    public TextMeshProUGUI highscoreTextUI;
+    public TextMeshProUGUI highscoreTextGameOverUI;
+    public TextMeshProUGUI shopPointsUI;
     public GameObject gameScreen;
     public GameObject shopScreen;
     public GameObject titleScreen;
@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
     private Button saveButton;
     private Button quitButton;
     private int score;
+    private int shopPoints;
 
     private void Awake()
     {
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
-        scoreText.text = "Score: " + score;
+        scoreTextUI.text = "Score: " + score;
 
         if (score <= PlayerPrefs.GetInt("Highscore", 0))
         {
@@ -97,7 +98,7 @@ public class GameManager : MonoBehaviour
 
         restartButton = GameObject.Find("RestartButton").GetComponent<Button>();
         restartButton.onClick.AddListener(RestartGame);
-        highscoreTextGameOver.text = "Highscore: " + PlayerPrefs.GetInt("Highscore", 0).ToString();
+        highscoreTextGameOverUI.text = "Highscore: " + PlayerPrefs.GetInt("Highscore", 0).ToString();
 
         CalculateShopPoints();
     }
@@ -107,8 +108,21 @@ public class GameManager : MonoBehaviour
     {
         int playerPoints;
         playerPoints = (PlayerPrefs.GetInt("ShopPoints", 0) + score);
-        shopPoints.text = "Shop Points: " + playerPoints;
+        shopPointsUI.text = "Shop Points: " + playerPoints;
+        
         PlayerPrefs.SetInt("ShopPoints", playerPoints);
+
+        SetShopPoints(playerPoints);
+    }
+
+    public void SetShopPoints(int shopPoints)
+    {
+        this.shopPoints = shopPoints;
+    }
+
+    public int GetShopPoints()
+    {
+        return shopPoints;
     }
 
     private void StartGame()
@@ -117,7 +131,7 @@ public class GameManager : MonoBehaviour
         gameScreen.gameObject.SetActive(true);
         titleScreen.gameObject.SetActive(false);
 
-        highscoreText.text = "Highscore: " + PlayerPrefs.GetInt("Highscore", 0).ToString();
+        highscoreTextUI.text = "Highscore: " + PlayerPrefs.GetInt("Highscore", 0).ToString();
         isGameActive = true;
         score = 0;
         UpdateScore(0);
@@ -170,7 +184,7 @@ public class GameManager : MonoBehaviour
     private void ResetScore()
     {
         PlayerPrefs.DeleteKey("Highscore");
-        highscoreText.text = "0";
+        highscoreTextUI.text = "0";
     }
 
     private void RestartGame()
