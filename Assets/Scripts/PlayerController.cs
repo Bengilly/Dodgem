@@ -434,7 +434,9 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
         meshCharacterLegFR.mesh = meshDogLegFR.sharedMesh;
         meshCharacterLegFR.transform.localPosition = new Vector3(0.154f, 0.3063f, 0.196f);
         meshCharacterLegBL.mesh = meshDogLegBL.sharedMesh;
+        meshCharacterLegBL.transform.localPosition = new Vector3(-0.3437675f, 0.3890306f, -0.366496f);
         meshCharacterLegBR.mesh = meshDogLegBR.sharedMesh;
+        meshCharacterLegBR.transform.localPosition = new Vector3(0.3562458f, 0.4031368f, -0.3828406f);
         meshCharacterTail.mesh = meshDogTail.sharedMesh;
 
         //load animations
@@ -455,13 +457,13 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
         meshCharacterBody.mesh = meshLionBody.sharedMesh;
         meshCharacterHead.mesh = meshLionHead.sharedMesh;
         meshCharacterLegFL.mesh = meshLionLegFL.sharedMesh;
-
+        meshCharacterLegFL.transform.localPosition = new Vector3(-0.3288f, 1.12f, 0.351f);
         meshCharacterLegFR.mesh = meshLionLegFR.sharedMesh;
-
+        meshCharacterLegFR.transform.localPosition = new Vector3(-0.3319f, 1.12f, 0.351f);
         meshCharacterLegBL.mesh = meshLionLegBL.sharedMesh;
-
+        meshCharacterLegBL.transform.localPosition = new Vector3(-0.3288f, 1.12f, 0.514f);
         meshCharacterLegBR.mesh = meshLionLegBR.sharedMesh;
-
+        meshCharacterLegBR.transform.localPosition = new Vector3(-0.3319f, 1.12f, 0.514f);
         meshCharacterTail.mesh = meshLionTail.sharedMesh;
 
         //load animations
@@ -481,7 +483,9 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
         //load mesh onto player character
         meshCharacterBody.mesh = meshPenguinBody.sharedMesh;
         meshCharacterWingL.mesh = meshPenguinWingL.sharedMesh;
+        meshCharacterWingL.transform.localPosition = new Vector3(-0.5541989f, 0.8080121f, 0.07016902f);
         meshCharacterWingR.mesh = meshPenguinWingR.sharedMesh;
+        meshCharacterWingR.transform.localPosition = new Vector3(0.5488839f, 0.8143129f, 0.07041698f);
 
         //load animations
         anim.runtimeAnimatorController = GameAssets.i.animatorPenguin;
