@@ -3684,9 +3684,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e1e3d8a98da53d4d8bcd13a27e0ada1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreTextUI: {fileID: 873768052}
-  highscoreTextUI: {fileID: 1631665056}
-  highscoreTextGameOverUI: {fileID: 1730532124}
+  scoreGameUI: {fileID: 873768052}
+  highscoreGameUI: {fileID: 1631665056}
+  gameOverTextGameOverUI: {fileID: 1730532124}
+  highscoreGameOverUI: {fileID: 179969077}
   shopPointsUI: {fileID: 1401732440}
   gameScreen: {fileID: 1299982089}
   shopScreen: {fileID: 2117516962}

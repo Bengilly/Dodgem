@@ -8,9 +8,10 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-    public TextMeshProUGUI scoreTextUI;
-    public TextMeshProUGUI highscoreTextUI;
-    public TextMeshProUGUI highscoreTextGameOverUI;
+    public TextMeshProUGUI scoreGameUI;
+    public TextMeshProUGUI highscoreGameUI;
+    public TextMeshProUGUI gameOverTextGameOverUI;
+    public TextMeshProUGUI highscoreGameOverUI;
     public TextMeshProUGUI shopPointsUI;
     public GameObject gameScreen;
     public GameObject shopScreen;
@@ -74,7 +75,7 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
-        scoreTextUI.text = "Score: " + score;
+        scoreGameUI.text = "Score: " + score;
 
         if (score <= PlayerPrefs.GetInt("Highscore", 0))
         {
@@ -98,7 +99,11 @@ public class GameManager : MonoBehaviour
 
         restartButton = GameObject.Find("RestartButton").GetComponent<Button>();
         restartButton.onClick.AddListener(RestartGame);
-        highscoreTextGameOverUI.text = "Highscore: " + PlayerPrefs.GetInt("Highscore", 0).ToString();
+
+        //update game/gameover highscore value
+        string highscore = "Highscore: " + PlayerPrefs.GetInt("Highscore", 0).ToString();
+        highscoreGameUI.text = highscore;
+        highscoreGameOverUI.text = highscore;
 
         CalculateShopPoints();
     }
@@ -131,7 +136,7 @@ public class GameManager : MonoBehaviour
         gameScreen.gameObject.SetActive(true);
         titleScreen.gameObject.SetActive(false);
 
-        highscoreTextUI.text = "Highscore: " + PlayerPrefs.GetInt("Highscore", 0).ToString();
+        highscoreGameUI.text = "Highscore: " + PlayerPrefs.GetInt("Highscore", 0).ToString();
         isGameActive = true;
         score = 0;
         UpdateScore(0);
@@ -184,7 +189,7 @@ public class GameManager : MonoBehaviour
     private void ResetScore()
     {
         PlayerPrefs.DeleteKey("Highscore");
-        highscoreTextUI.text = "0";
+        highscoreGameUI.text = "0";
     }
 
     private void RestartGame()
