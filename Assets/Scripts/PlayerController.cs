@@ -90,7 +90,10 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         anim = GetComponent<Animator>();
 
+        string characterModel = PlayerPrefs.GetString("CharacterModel", "Cat");
+
         LoadCharacterModels();
+        LoadSavedCharacterModel(characterModel);
     }
 
 
@@ -303,6 +306,14 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
         }
         
     }
+    private void LoadSavedCharacterModel(string characterModel)
+    {
+        if (characterModel == "Cat") { SetCharacterCat(); }
+        if (characterModel == "Chicken") { SetCharacterChicken(); }
+        if (characterModel == "Dog") { SetCharacterDog(); }
+        if (characterModel == "Lion") { SetCharacterLion(); }
+        if (characterModel == "Penguin") { SetCharacterPenguin(); }
+    }
 
     private void LoadCharacterModels()
     {
@@ -357,6 +368,8 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
 
     private void SetCharacterCat()
     {
+        PlayerPrefs.SetString("CharacterModel", "Cat");
+
         DisableWing();
 
         EnableBackLegs();
@@ -390,6 +403,8 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
 
     private void SetCharacterChicken()
     {
+        PlayerPrefs.SetString("CharacterModel", "Chicken");
+
         DisableTail();
         DisableWing();
         DisableBackLegs();
@@ -417,6 +432,8 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
     }
     private void SetCharacterDog()
     {
+        PlayerPrefs.SetString("CharacterModel", "Dog");
+
         DisableWing();
 
         EnableTail();
@@ -444,6 +461,8 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
     }
     private void SetCharacterLion()
     {
+        PlayerPrefs.SetString("CharacterModel", "Lion");
+
         DisableWing();
 
         EnableTail();
@@ -471,6 +490,8 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
     }
     private void SetCharacterPenguin()
     {
+        PlayerPrefs.SetString("CharacterModel", "Penguin");
+
         DisableTail();
         DisableFrontLegs();
         DisableBackLegs();
