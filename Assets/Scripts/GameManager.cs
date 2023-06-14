@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     public AudioClip highscoreAudio;
     public AudioClip deathAudio;
     public AudioClip pickupAudio;
-    //public AudioClip gameMusic;
     public bool isGameActive = false;
 
     private AudioSource audioSource;
@@ -36,6 +35,7 @@ public class GameManager : MonoBehaviour
     private Button quitButton;
     private int score;
     private int shopPoints;
+    private int playerPoints;
 
     private void Awake()
     {
@@ -63,6 +63,8 @@ public class GameManager : MonoBehaviour
 
         shopButton = GameObject.Find("ShopButton").GetComponent<Button>();
         shopButton.onClick.AddListener(StoreScreen);
+
+        CalculateShopPoints();
     }
 
     // Update is called once per frame
@@ -100,22 +102,18 @@ public class GameManager : MonoBehaviour
         restartButton = GameObject.Find("RestartButton").GetComponent<Button>();
         restartButton.onClick.AddListener(RestartGame);
 
-        //update game/gameover highscore value
         string highscore = "Highscore: " + PlayerPrefs.GetInt("Highscore", 0).ToString();
         highscoreGameUI.text = highscore;
         highscoreGameOverUI.text = highscore;
-
+        
         CalculateShopPoints();
     }
 
     //calculate shop points by adding score to current points stored
     private void CalculateShopPoints()
     {
-        int playerPoints;
-        playerPoints = (PlayerPrefs.GetInt("ShopPoints", 0) + score);
+        playerPoints = (PlayerPrefs.GetInt("ShopPoints") + score);
         shopPointsUI.text = "Shop Points: " + playerPoints;
-        
-        PlayerPrefs.SetInt("ShopPoints", playerPoints);
 
         SetShopPoints(playerPoints);
     }
@@ -123,6 +121,9 @@ public class GameManager : MonoBehaviour
     public void SetShopPoints(int shopPoints)
     {
         this.shopPoints = shopPoints;
+        shopPointsUI.text = "Shop Points: " + shopPoints;
+        PlayerPrefs.SetInt("ShopPoints", shopPoints);
+        Debug.Log(shopPoints);
     }
 
     public int GetShopPoints()
@@ -132,11 +133,11 @@ public class GameManager : MonoBehaviour
 
     private void StartGame()
     {
-
         gameScreen.gameObject.SetActive(true);
         titleScreen.gameObject.SetActive(false);
 
         highscoreGameUI.text = "Highscore: " + PlayerPrefs.GetInt("Highscore", 0).ToString();
+
         isGameActive = true;
         score = 0;
         UpdateScore(0);
@@ -155,8 +156,8 @@ public class GameManager : MonoBehaviour
         returnButton = GameObject.Find("OptionsReturnButton").GetComponent<Button>();
         returnButton.onClick.AddListener(TitleScreen);
 
-       saveButton = GameObject.Find("SaveButton").GetComponent<Button>();
-       saveButton.onClick.AddListener(SaveButton); 
+        saveButton = GameObject.Find("SaveButton").GetComponent<Button>();
+        saveButton.onClick.AddListener(SaveButton); 
     }
 
     //load title screen
@@ -171,6 +172,8 @@ public class GameManager : MonoBehaviour
     {
         shopScreen.gameObject.SetActive(true);
         titleScreen.gameObject.SetActive(false);
+
+        shopPointsUI.text = "Shop Points: " + PlayerPrefs.GetInt("ShopPoints", 0).ToString();
 
         returnButton = GameObject.Find("ShopReturnButton").GetComponent<Button>();
         returnButton.onClick.AddListener(TitleScreen);

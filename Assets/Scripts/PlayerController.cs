@@ -295,6 +295,7 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
         {
             shopPoints -= pointsRequired;
             gameManager.SetShopPoints(shopPoints);
+            
             OnPointsAmountChanged?.Invoke(this, EventArgs.Empty);
             Debug.Log("Can buy item");
             return true;

@@ -19,15 +19,15 @@ public class UI_ShopItem
         {
             default:
             case Item.Cat:
-                return 0;
+                return 1;
             case Item.Chicken:
-                return 0;
+                return 2;
             case Item.Dog:
-                return 0;
+                return 3;
             case Item.Lion:
-                return 0;
+                return 4;
             case Item.Penguin:
-                return 0;
+                return 5;
         }
     }
 
