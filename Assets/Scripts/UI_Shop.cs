@@ -5,8 +5,9 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Events;
 using System;
+using UnityEngine.EventSystems;
 
-public class UI_Shop : MonoBehaviour
+public class UI_Shop : MonoBehaviour, IPointerExitHandler//, IPointerEnterHandler,
 {
     private Transform container;
     private Transform shopItemTemplate;
@@ -49,6 +50,7 @@ public class UI_Shop : MonoBehaviour
 
         buyButton = shopItemTransform.Find("BuyButton").GetComponent<Button>();
         buyButton.onClick.AddListener(() => { TryBuyItem(item); });
+        //buyButton.OnPointerEnter();
     }
 
     private void TryBuyItem(UI_ShopItem.Item item)
@@ -57,7 +59,23 @@ public class UI_Shop : MonoBehaviour
         {
             shopPurchaser.BoughtItem(item);
         }
+        else
+        {
+            UI_TooltipManager._instance.ShowTooltip();
+            Debug.Log("Load tooltip");
+        }
+    }
 
-        
+    //public void OnPointerEnter(PointerEventData eventData)
+    //{
+    //    UI_TooltipManager._instance.ShowTooltip();
+    //    Debug.Log("Load tooltip");
+    //}
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ((IPointerExitHandler)buyButton).OnPointerExit(eventData);
+        UI_TooltipManager._instance.HideTooltip();
+        Debug.Log("Hide tooltip");
     }
 } 

@@ -296,17 +296,18 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
             shopPoints -= pointsRequired;
             gameManager.SetShopPoints(shopPoints);
             
-            OnPointsAmountChanged?.Invoke(this, EventArgs.Empty);
+            //OnPointsAmountChanged?.Invoke(this, EventArgs.Empty);
             Debug.Log("Can buy item");
             return true;
         }
         else
         {
+            
             Debug.Log("Unable to buy item");
             return false;
         }
-        
     }
+
     private void LoadSavedCharacterModel(string characterModel)
     {
         if (characterModel == "Cat") { SetCharacterCat(); }
