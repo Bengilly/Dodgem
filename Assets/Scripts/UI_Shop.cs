@@ -74,8 +74,13 @@ public class UI_Shop : MonoBehaviour, IPointerExitHandler//, IPointerEnterHandle
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        ((IPointerExitHandler)buyButton).OnPointerExit(eventData);
-        UI_TooltipManager._instance.HideTooltip();
-        Debug.Log("Hide tooltip");
+        //only hide tooltip if it is currently enabled
+        if(UI_TooltipManager._instance.isActiveAndEnabled)
+        {
+            ((IPointerExitHandler)buyButton).OnPointerExit(eventData);
+            UI_TooltipManager._instance.HideTooltip();
+            Debug.Log("Hide tooltip");
+        }
+
     }
 } 

@@ -30,7 +30,8 @@ public class GameManager : MonoBehaviour
     private Button restartButton;
     private Button optionsButton;
     private Button returnButton;
-    private Button resetButton;
+    private Button highscoreResetButton;
+    private Button shopPointsResetButton;
     private Button saveButton;
     private Button quitButton;
     private int score;
@@ -150,8 +151,12 @@ public class GameManager : MonoBehaviour
         optionsScreen.gameObject.SetActive(true);
         titleScreen.gameObject.SetActive(false);
 
-        resetButton = GameObject.Find("ResetHighscores").GetComponent<Button>();
-        resetButton.onClick.AddListener(ResetScore);
+        highscoreResetButton = GameObject.Find("ResetHighscores").GetComponent<Button>();
+        highscoreResetButton.onClick.AddListener(ResetScore);
+
+        shopPointsResetButton = GameObject.Find("ResetShopPoints").GetComponent<Button>();
+        shopPointsResetButton.onClick.AddListener(ResetShopPoints);
+        
 
         returnButton = GameObject.Find("OptionsReturnButton").GetComponent<Button>();
         returnButton.onClick.AddListener(TitleScreen);
@@ -193,6 +198,12 @@ public class GameManager : MonoBehaviour
     {
         PlayerPrefs.DeleteKey("Highscore");
         highscoreGameUI.text = "0";
+    }
+
+    private void ResetShopPoints()
+    {
+        PlayerPrefs.DeleteKey("ShopPoints");
+        shopPointsUI.text = "0";
     }
 
     private void RestartGame()
