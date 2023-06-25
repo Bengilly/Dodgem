@@ -8,13 +8,13 @@ public class Pickup_Nuke : PickupObject
     public AudioClip nukeAudio;
 
     private GameObject[] enemyObj;
-    private AudioSource Audiosource;
+    private AudioSource audiosource;
     private Light nukeLight;
 
     // Start is called before the first frame update
     void Start()
     {
-        Audiosource = GetComponent<AudioSource>();
+        audiosource = GetComponent<AudioSource>();
 
         nukeLight = GetComponent<Light>();
     }
@@ -22,7 +22,7 @@ public class Pickup_Nuke : PickupObject
     public override void CollectPickup()
     {
         //play bomb audio
-        Audiosource.PlayOneShot(nukeAudio, 0.3f);
+        audiosource.PlayOneShot(nukeAudio, 0.3f);
 
         //disable mesh and lighting of pickup
         gameObject.GetComponent<MeshRenderer>().enabled = false;
@@ -42,10 +42,17 @@ public class Pickup_Nuke : PickupObject
     {
         enemyObj = GameObject.FindGameObjectsWithTag("Enemy");
         //destroy half the enemies
-        for (int i = 0; i <= enemyObj.Length /2; i++)
+        if(enemyObj.Length==0)
+        {
+            return;
+        }
+        else
+        {
+            for (int i = 0; i <= enemyObj.Length / 2; i++)
             {
                 Destroy(enemyObj[i]);
                 Instantiate(deathParticle, enemyObj[i].transform.position, deathParticle.transform.rotation);
             }
+        }
     }
 }

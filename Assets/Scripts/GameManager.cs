@@ -38,6 +38,16 @@ public class GameManager : MonoBehaviour
     private int shopPoints;
     private int playerPoints;
 
+    //future work - implement state switching for game screens
+    private enum ScreenState
+    {
+        MainMenuScreen,
+        GameScreen,
+        ShopScreen,
+        OptionsScreen,
+        GameOverScreen
+    }
+
     private void Awake()
     {
         
@@ -45,7 +55,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        titleScreen.gameObject.SetActive(true);
+        titleScreen.SetActive(true);
 
         startButton = GameObject.Find("PlayButton").GetComponent<Button>();
         startButton.onClick.AddListener(StartGame);
@@ -66,12 +76,6 @@ public class GameManager : MonoBehaviour
         shopButton.onClick.AddListener(StoreScreen);
 
         CalculateShopPoints();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     //updates score value and displays it on the UI
@@ -96,8 +100,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         audioSource.PlayOneShot(deathAudio, 0.5f);
-        gameScreen.gameObject.SetActive(false);
-        gameOverScreen.gameObject.SetActive(true);
+        gameScreen.SetActive(false);
+        gameOverScreen.SetActive(true);
         isGameActive = false;
 
         restartButton = GameObject.Find("RestartButton").GetComponent<Button>();
@@ -134,8 +138,8 @@ public class GameManager : MonoBehaviour
 
     private void StartGame()
     {
-        gameScreen.gameObject.SetActive(true);
-        titleScreen.gameObject.SetActive(false);
+        gameScreen.SetActive(true);
+        titleScreen.SetActive(false);
 
         highscoreGameUI.text = "Highscore: " + PlayerPrefs.GetInt("Highscore", 0).ToString();
 
@@ -148,8 +152,8 @@ public class GameManager : MonoBehaviour
     //load options menu
     private void OptionsMenu()
     {
-        optionsScreen.gameObject.SetActive(true);
-        titleScreen.gameObject.SetActive(false);
+        optionsScreen.SetActive(true);
+        titleScreen.SetActive(false);
 
         highscoreResetButton = GameObject.Find("ResetHighscores").GetComponent<Button>();
         highscoreResetButton.onClick.AddListener(ResetScore);
@@ -168,15 +172,15 @@ public class GameManager : MonoBehaviour
     //load title screen
     private void TitleScreen()
     {
-        titleScreen.gameObject.SetActive(true);
-        optionsScreen.gameObject.SetActive(false);
-        shopScreen.gameObject.SetActive(false);
+        titleScreen.SetActive(true);
+        optionsScreen.SetActive(false);
+        shopScreen.SetActive(false);
     }
 
     private void StoreScreen()
     {
-        shopScreen.gameObject.SetActive(true);
-        titleScreen.gameObject.SetActive(false);
+        shopScreen.SetActive(true);
+        titleScreen.SetActive(false);
 
         shopPointsUI.text = "Shop Points: " + PlayerPrefs.GetInt("ShopPoints", 0).ToString();
 

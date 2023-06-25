@@ -50,7 +50,6 @@ public class UI_Shop : MonoBehaviour, IPointerExitHandler//, IPointerEnterHandle
 
         buyButton = shopItemTransform.Find("BuyButton").GetComponent<Button>();
         buyButton.onClick.AddListener(() => { TryBuyItem(item); });
-        //buyButton.OnPointerEnter();
     }
 
     private void TryBuyItem(UI_ShopItem.Item item)
@@ -65,12 +64,6 @@ public class UI_Shop : MonoBehaviour, IPointerExitHandler//, IPointerEnterHandle
             Debug.Log("Load tooltip");
         }
     }
-
-    //public void OnPointerEnter(PointerEventData eventData)
-    //{
-    //    UI_TooltipManager._instance.ShowTooltip();
-    //    Debug.Log("Load tooltip");
-    //}
 
     public void OnPointerExit(PointerEventData eventData)
     {
