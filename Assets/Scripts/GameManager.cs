@@ -8,6 +8,8 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    private static GameManager _instance;
+
     public TextMeshProUGUI scoreGameUI;
     public TextMeshProUGUI highscoreGameUI;
     public TextMeshProUGUI gameOverTextGameOverUI;
@@ -21,7 +23,7 @@ public class GameManager : MonoBehaviour
     public AudioClip highscoreAudio;
     public AudioClip deathAudio;
     public AudioClip pickupAudio;
-    public bool isGameActive = false;
+
 
     private AudioSource audioSource;
     private VolumeSliderController volumeSlider;
@@ -37,6 +39,9 @@ public class GameManager : MonoBehaviour
     private int score;
     private int shopPoints;
     private int playerPoints;
+    private bool isGameActive = false;
+
+    //private ScreenState currentState;
 
     //future work - implement state switching for game screens
     private enum ScreenState
@@ -48,13 +53,30 @@ public class GameManager : MonoBehaviour
         GameOverScreen
     }
 
+    public static GameManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                Debug.LogError("Game Manager  is null");
+            }
+
+            return _instance;
+        }
+    }
+
     private void Awake()
     {
-        
+        _instance = this;
     }
+
     // Start is called before the first frame update
     void Start()
     {
+        //currentState = ScreenState.MainMenuScreen;
+        //SetGameState(currentState);
+
         titleScreen.SetActive(true);
 
         startButton = GameObject.Find("PlayButton").GetComponent<Button>();
@@ -78,6 +100,46 @@ public class GameManager : MonoBehaviour
         CalculateShopPoints();
     }
 
+    //private void SetGameState(ScreenState state)
+    //{
+    //    currentState = state;
+
+    //    switch (state)
+    //    {
+    //        default:
+    //        case ScreenState.MainMenuScreen:
+    //            LoadMenuState(); break;
+    //        case ScreenState.GameScreen:
+    //            LoadGameState(); break;
+    //        case ScreenState.ShopScreen:
+    //            LoadShopState(); break;
+    //        case ScreenState.OptionsScreen:
+    //            LoadOptionsState(); break;
+    //        case ScreenState.GameOverScreen:
+    //            LoadGameOverState(); break;
+    //    }
+    //} 
+    //private void LoadMenuState()
+    //{
+
+    //}
+    //private void LoadGameState()
+    //{
+
+    //}
+    //private void LoadShopState()
+    //{
+
+    //}
+    //private void LoadOptionsState()
+    //{
+
+    //}
+    //private void LoadGameOverState()
+    //{
+
+    //}
+
     //updates score value and displays it on the UI
     public void UpdateScore(int scoreToAdd)
     {
@@ -94,6 +156,11 @@ public class GameManager : MonoBehaviour
             audioSource.PlayOneShot(highscoreAudio, 0.3f);
         }
 
+    }
+
+    public bool IsGameOver()
+    {
+        return isGameActive;
     }
 
     //when the player dies, end game and display gameover UI

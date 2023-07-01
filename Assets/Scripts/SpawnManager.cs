@@ -10,9 +10,6 @@ public class SpawnManager : MonoBehaviour
     public GameObject nukePrefab;
     public GameObject slowMoPrefab;
 
-    private PlayerController player;
-    private GameManager gameManager;
-
     private int ScorePickupCount = 0;
     private int BonusPickupCount = 0;
     private float spawnRange = 6.5f;
@@ -20,8 +17,6 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<PlayerController>();
-        gameManager = GameObject.Find("GameManager").GetComponentInParent<GameManager>();
 
     }
 
@@ -63,7 +58,7 @@ public class SpawnManager : MonoBehaviour
         ScorePickupCount = FindObjectsOfType<Pickup_Score>().Length;
         BonusPickupCount = FindObjectsOfType<Pickup_Shield>().Length + FindObjectsOfType<Pickup_Nuke>().Length + FindObjectsOfType<Pickup_SlowMo>().Length;
 
-        if (ScorePickupCount == 0 && gameManager.isGameActive == true)
+        if (ScorePickupCount == 0 && GameManager.Instance.IsGameOver() == true)
         {
             Instantiate(scorePickupPrefab, GeneratePickupSpawnLocation(), scorePickupPrefab.transform.rotation);
 
@@ -71,7 +66,7 @@ public class SpawnManager : MonoBehaviour
             SpawnEnemyWave();
         }
 
-        if (BonusPickupCount == 0 && gameManager.isGameActive == true)
+        if (BonusPickupCount == 0 && GameManager.Instance.IsGameOver() == true)
         {
             int rand = Random.Range(1, 4);
             if (rand == 1)

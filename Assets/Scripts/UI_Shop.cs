@@ -7,7 +7,7 @@ using UnityEngine.Events;
 using System;
 using UnityEngine.EventSystems;
 
-public class UI_Shop : MonoBehaviour, IPointerExitHandler//, IPointerEnterHandler,
+public class UI_Shop : MonoBehaviour, IPointerExitHandler
 {
     private Transform container;
     private Transform shopItemTemplate;

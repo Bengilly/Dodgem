@@ -6,7 +6,6 @@ public class Enemy : MonoBehaviour
 {
     private Rigidbody enemyRb;
     private GameObject player;
-    private GameManager gameManager;
     private float bounceForce = 5.0f;
     public float speed = 5;
 
@@ -16,13 +15,12 @@ public class Enemy : MonoBehaviour
     {
         enemyRb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (gameManager.isGameActive == true)
+        if (GameManager.Instance.IsGameOver() == true)
         {
             MoveEnemy();
         }

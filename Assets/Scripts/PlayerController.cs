@@ -19,7 +19,6 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
 
     public event EventHandler OnPointsAmountChanged;
 
-    private GameManager gameManager;
     private Player player;
     private Pickup_Nuke nukePickup;
     private Pickup_Shield shieldPickup;
@@ -36,13 +35,13 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         player = GetComponent<Player>();
 
         string characterModel = PlayerPrefs.GetString("CharacterModel", "Cat");
 
-        //player.LoadCharacterModels();
         player.LoadSavedCharacterModel(characterModel);
+
+        SetPlayerBoundaries();
     }
 
 
@@ -50,18 +49,13 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
     void Update()
     {
         MovePlayer();
-
-        powerupIndicator.transform.position = transform.position + new Vector3(0, 0, 0);
-        powerupIndicator.transform.Rotate(0, 100 * Time.deltaTime, 0);
     }
 
     //input controls for moving player
     private void MovePlayer()
     {
-        if (gameManager.isGameActive == true)
+        if (GameManager.Instance.IsGameOver() == true)
         {
-            PlayerBoundaries();
-
             PlayerInput();
         }
     }
@@ -104,7 +98,7 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
 
             StartCoroutine(ScorePickupCountdownRoutine());
             Destroy(collider.gameObject);
-            gameManager.UpdateScore(score);
+            GameManager.Instance.UpdateScore(score);
         }
 
         if (collider.gameObject.CompareTag("Powerup"))
@@ -160,6 +154,9 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
     //powerup coroutine to disable powerup after 3 seconds
     IEnumerator PowerupCountDownRoutine()
     {
+        powerupIndicator.transform.position = transform.position + new Vector3(0, 0, 0);
+        powerupIndicator.transform.Rotate(0, 100 * Time.deltaTime, 0);
+
         yield return new WaitForSeconds(3);
         hasPowerup = false;
         powerupIndicator.gameObject.SetActive(false);
@@ -186,12 +183,12 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
             Instantiate(deathParticle, transform.position, deathParticle.transform.rotation);
 
             Destroy(gameObject);
-            gameManager.GameOver();
+            GameManager.Instance.GameOver();
         }
     }
 
     //defining the playzone -- setting wall boundaries//
-    private void PlayerBoundaries()
+    private void SetPlayerBoundaries()
     {
         //left wall
         if (transform.position.x < -gameBoundaries)
@@ -236,12 +233,12 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
 
     public bool CanBuyItem(int pointsRequired)
     {
-        int shopPoints = gameManager.GetShopPoints();
+        int shopPoints = GameManager.Instance.GetShopPoints();
 
         if (shopPoints >= pointsRequired)
         {
             shopPoints -= pointsRequired;
-            gameManager.SetShopPoints(shopPoints);
+            GameManager.Instance.SetShopPoints(shopPoints);
 
             //OnPointsAmountChanged?.Invoke(this, EventArgs.Empty);
             Debug.Log("Can buy item");

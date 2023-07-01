@@ -91,6 +91,7 @@ public class Player : MonoBehaviour
     public void SetCharacterCat()
     {
         PlayerPrefs.SetString("CharacterModel", "Cat");
+
         LoadCatMeshes();
 
         DisableWing();
@@ -249,7 +250,7 @@ public class Player : MonoBehaviour
     private void LoadLionMeshes()
     {
         //lion meshes
-        meshLionBody = GameAssets.i.lionBody;
+        meshLionBody = GameAssets. i.lionBody;
         meshLionHead = GameAssets.i.lionHead;
         meshLionLegFL = GameAssets.i.lionLegFL;
         meshLionLegFR = GameAssets.i.lionLegFR;
