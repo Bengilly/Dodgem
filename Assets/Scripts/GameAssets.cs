@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class GameAssets : MonoBehaviour
 {
-    private static GameAssets _i;
+    private static GameAssets instance;
 
-    public static GameAssets i
+    public static GameAssets Instance
     {
         get
         {
-            if (_i == null) _i = (Instantiate(Resources.Load("GameAssets")) as GameObject).GetComponent<GameAssets>();
-            return _i;
+            if (instance == null) instance = (Instantiate(Resources.Load("GameAssets")) as GameObject).GetComponent<GameAssets>();
+            return instance;
         }
     }
 

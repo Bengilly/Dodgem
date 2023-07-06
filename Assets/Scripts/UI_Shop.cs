@@ -35,6 +35,7 @@ public class UI_Shop : MonoBehaviour, IPointerExitHandler
 
     }
 
+    //create dynamic shop items using template
     private void CreateItemButton(UI_ShopItem.Item item, Sprite itemSprite, string itemName, int itemPrice, int positionIndex)
     {
         Transform shopItemTransform = Instantiate(shopItemTemplate, container);
@@ -57,14 +58,17 @@ public class UI_Shop : MonoBehaviour, IPointerExitHandler
         if(shopPurchaser.CanBuyItem(UI_ShopItem.GetPrice(item)))
         {
             shopPurchaser.BoughtItem(item);
+            ScreenManager.Instance.ShowCharacterPopupText(item.ToString(), UI_ShopItem.GetPrice(item));
         }
         else
         {
+            //show cursor tooltip if player has insufficient shop points
             UI_TooltipManager._instance.ShowTooltip();
             Debug.Log("Load tooltip");
         }
     }
 
+    //hide tooltip when cursor moved off button
     public void OnPointerExit(PointerEventData eventData)
     {
         //only hide tooltip if it is currently enabled

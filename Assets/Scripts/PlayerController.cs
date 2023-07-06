@@ -1,9 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using UnityEngine.Events;
 using System;
 
 public class PlayerController : MonoBehaviour, IShopPurchaser
@@ -17,7 +13,7 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
     public float playerSpeed = 10.0f;
     public bool slowMoActive = false;
 
-    public event EventHandler OnPointsAmountChanged;
+    //public event EventHandler OnPointsAmountChanged;
 
     private Player player;
     private Pickup_Nuke nukePickup;
@@ -54,7 +50,7 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
     //input controls for moving player
     private void MovePlayer()
     {
-        if (GameManager.Instance.IsGameOver() == true)
+        if (GameManager.Instance.state == GameManager.GameState.GameScreen)
         {
             PlayerInput();
         }
@@ -107,7 +103,7 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
             shieldPickup.CollectPickup();
 
             hasPowerup = true;
-            powerupIndicator.gameObject.SetActive(true);
+            powerupIndicator.SetActive(true);
             StartCoroutine(PowerupCountDownRoutine());
         }
 
@@ -148,7 +144,6 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
         {
             playerSpeed = 10.0f;
         }
-
     }
 
     //powerup coroutine to disable powerup after 3 seconds
@@ -159,7 +154,7 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
 
         yield return new WaitForSeconds(3);
         hasPowerup = false;
-        powerupIndicator.gameObject.SetActive(false);
+        powerupIndicator.SetActive(false);
     }
 
     IEnumerator SlowMoCountDownRoutine()
@@ -183,7 +178,7 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
             Instantiate(deathParticle, transform.position, deathParticle.transform.rotation);
 
             Destroy(gameObject);
-            GameManager.Instance.GameOver();
+            GameManager.Instance.SetGameState(GameManager.GameState.GameOverScreen);
         }
     }
 
@@ -212,6 +207,7 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
         }
     }
 
+    //control which shop item has been bought and assign it to player character
     public void BoughtItem(UI_ShopItem.Item item)
     {
         Debug.Log("Bought character: " + item);
@@ -231,6 +227,7 @@ public class PlayerController : MonoBehaviour, IShopPurchaser
         }
     }
 
+    //check whether item can be bought and if so, buy item and update shop points
     public bool CanBuyItem(int pointsRequired)
     {
         int shopPoints = GameManager.Instance.GetShopPoints();

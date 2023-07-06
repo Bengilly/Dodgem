@@ -10,21 +10,7 @@ public class VolumeSliderController : MonoBehaviour
 
     [SerializeField] private Slider volumeSlider = null;
     [SerializeField] private Text volumeText = null;
-    [SerializeField] private GameManager gameManager;
 
-    public void Awake()
-    {
-        gameManager = GetComponent<GameManager>();
-    }
-    private void Start()
-    {
-        
-    }
-
-    private void Update()
-    {
-        
-    }
 
     //run each time the volume slider is moved
     public void VolumeSlider(float volume)
@@ -36,7 +22,7 @@ public class VolumeSliderController : MonoBehaviour
         volumeSlider.value = volumeValue;
 
         //update audio source volume
-        gameManager.UpdateVolume();
+        GameManager.Instance.UpdateVolume();
     }
 
     public float GetVolume()

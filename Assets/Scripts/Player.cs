@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
         meshCharacterLegBR.mesh = meshCatLegBR.sharedMesh;
         meshCharacterLegBR.transform.localPosition = new Vector3(0.2500359f, 0.4062789f, -0.2567908f);
 
-        anim.runtimeAnimatorController = GameAssets.i.animatorCat;
+        anim.runtimeAnimatorController = GameAssets.Instance.animatorCat;
     }
 
     public void SetCharacterChicken()
@@ -152,7 +152,7 @@ public class Player : MonoBehaviour
         meshCharacterLegFR.transform.localPosition = new Vector3(0.3036214f, 0.5010772f, 0.00832437f);
 
         //load animations
-        anim.runtimeAnimatorController = GameAssets.i.animatorChicken;
+        anim.runtimeAnimatorController = GameAssets.Instance.animatorChicken;
     }
     public void SetCharacterDog()
     {
@@ -182,7 +182,7 @@ public class Player : MonoBehaviour
         meshCharacterTail.mesh = meshDogTail.sharedMesh;
 
         //load animations
-        anim.runtimeAnimatorController = GameAssets.i.animatorDog;
+        anim.runtimeAnimatorController = GameAssets.Instance.animatorDog;
     }
     public void SetCharacterLion()
     {
@@ -212,7 +212,7 @@ public class Player : MonoBehaviour
         meshCharacterTail.mesh = meshLionTail.sharedMesh;
 
         //load animations
-        anim.runtimeAnimatorController = GameAssets.i.animatorLion;
+        anim.runtimeAnimatorController = GameAssets.Instance.animatorLion;
     }
     public void SetCharacterPenguin()
     {
@@ -236,58 +236,58 @@ public class Player : MonoBehaviour
         meshCharacterWingR.transform.localPosition = new Vector3(0.5488839f, 0.8143129f, 0.07041698f);
 
         //load animations
-        anim.runtimeAnimatorController = GameAssets.i.animatorPenguin;
+        anim.runtimeAnimatorController = GameAssets.Instance.animatorPenguin;
     }
 
     private void LoadPenguinMeshes()
     {
         //penguin meshes
-        meshPenguinBody = GameAssets.i.penguinBody;
-        meshPenguinWingL = GameAssets.i.penguinWingL;
-        meshPenguinWingR = GameAssets.i.penguinWingR;
+        meshPenguinBody = GameAssets.Instance.penguinBody;
+        meshPenguinWingL = GameAssets.Instance.penguinWingL;
+        meshPenguinWingR = GameAssets.Instance.penguinWingR;
     }
 
     private void LoadLionMeshes()
     {
         //lion meshes
-        meshLionBody = GameAssets. i.lionBody;
-        meshLionHead = GameAssets.i.lionHead;
-        meshLionLegFL = GameAssets.i.lionLegFL;
-        meshLionLegFR = GameAssets.i.lionLegFR;
-        meshLionLegBL = GameAssets.i.lionLegBL;
-        meshLionLegBR = GameAssets.i.lionLegBR;
-        meshLionTail = GameAssets.i.lionTail;
+        meshLionBody = GameAssets. Instance.lionBody;
+        meshLionHead = GameAssets.Instance.lionHead;
+        meshLionLegFL = GameAssets.Instance.lionLegFL;
+        meshLionLegFR = GameAssets.Instance.lionLegFR;
+        meshLionLegBL = GameAssets.Instance.lionLegBL;
+        meshLionLegBR = GameAssets.Instance.lionLegBR;
+        meshLionTail = GameAssets.Instance.lionTail;
     }
 
     private void LoadDogMeshes()
     {
         //dog meshes
-        meshDogBody = GameAssets.i.dogBody;
-        meshDogHead = GameAssets.i.dogHead;
-        meshDogLegFL = GameAssets.i.dogLegFL;
-        meshDogLegFR = GameAssets.i.dogLegFR;
-        meshDogLegBL = GameAssets.i.dogLegBL;
-        meshDogLegBR = GameAssets.i.dogLegBR;
-        meshDogTail = GameAssets.i.dogTail;
+        meshDogBody = GameAssets.Instance.dogBody;
+        meshDogHead = GameAssets.Instance.dogHead;
+        meshDogLegFL = GameAssets.Instance.dogLegFL;
+        meshDogLegFR = GameAssets.Instance.dogLegFR;
+        meshDogLegBL = GameAssets.Instance.dogLegBL;
+        meshDogLegBR = GameAssets.Instance.dogLegBR;
+        meshDogTail = GameAssets.Instance.dogTail;
     }
 
     private void LoadChickenMeshes()
     {
         //chicken meshes
-        meshChickenBody = GameAssets.i.chickenBody;
-        meshChickenHead = GameAssets.i.chickenHead;
-        meshChickenLegL = GameAssets.i.chickenLegL;
-        meshChickenLegR = GameAssets.i.chickenLegR;
+        meshChickenBody = GameAssets.Instance.chickenBody;
+        meshChickenHead = GameAssets.Instance.chickenHead;
+        meshChickenLegL = GameAssets.Instance.chickenLegL;
+        meshChickenLegR = GameAssets.Instance.chickenLegR;
     }
 
     private void LoadCatMeshes()
     {
-        meshCatBody = GameAssets.i.catBody;
-        meshCatHead = GameAssets.i.catHead;
-        meshCatLegFL = GameAssets.i.catLegFL;
-        meshCatLegFR = GameAssets.i.catLegFR;
-        meshCatLegBL = GameAssets.i.catLegBL;
-        meshCatLegBR = GameAssets.i.catLegBR;
+        meshCatBody = GameAssets.Instance.catBody;
+        meshCatHead = GameAssets.Instance.catHead;
+        meshCatLegFL = GameAssets.Instance.catLegFL;
+        meshCatLegFR = GameAssets.Instance.catLegFR;
+        meshCatLegBL = GameAssets.Instance.catLegBL;
+        meshCatLegBR = GameAssets.Instance.catLegBR;
     }
 
     private void DisableHead()

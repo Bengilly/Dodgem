@@ -13,6 +13,7 @@ public class UI_ShopItem
         Penguin,
     }
 
+    //get the price of shop items
     public static int GetPrice(Item item)
     {
         switch (item)
@@ -31,21 +32,22 @@ public class UI_ShopItem
         }
     }
 
+    //get the sprite image of each item
     public static Sprite GetSprite(Item item)
     {
         switch (item)
         {
             default:
             case Item.Cat:
-                return GameAssets.i.cat;
+                return GameAssets.Instance.cat;
             case Item.Chicken:
-                return GameAssets.i.chicken;
+                return GameAssets.Instance.chicken;
             case Item.Dog:
-                return GameAssets.i.dog;
+                return GameAssets.Instance.dog;
             case Item.Lion:
-                return GameAssets.i.lion;
+                return GameAssets.Instance.lion;
             case Item.Penguin:
-                return GameAssets.i.penguin;
+                return GameAssets.Instance.penguin;
         }
     }
 }

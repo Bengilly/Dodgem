@@ -9,14 +9,14 @@ public class Pickup_Nuke : PickupObject
 
     private GameObject[] enemyObj;
     private AudioSource audiosource;
-    private Light nukeLight;
+    //private Light nukeLight;
 
     // Start is called before the first frame update
     void Start()
     {
         audiosource = GetComponent<AudioSource>();
 
-        nukeLight = GetComponent<Light>();
+        //nukeLight = GetComponent<Light>();
     }
 
     public override void CollectPickup()

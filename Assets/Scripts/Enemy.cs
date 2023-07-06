@@ -6,8 +6,8 @@ public class Enemy : MonoBehaviour
 {
     private Rigidbody enemyRb;
     private GameObject player;
-    private float bounceForce = 5.0f;
-    public float speed = 5;
+    private readonly float bounceForce = 5.0f;
+    private readonly float speed = 4;
 
 
     // Start is called before the first frame update
@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.IsGameOver() == true)
+        if (GameManager.Instance.state == GameManager.GameState.GameScreen)
         {
             MoveEnemy();
         }

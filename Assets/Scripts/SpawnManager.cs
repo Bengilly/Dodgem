@@ -12,13 +12,8 @@ public class SpawnManager : MonoBehaviour
 
     private int ScorePickupCount = 0;
     private int BonusPickupCount = 0;
-    private float spawnRange = 6.5f;
+    private readonly float spawnRange = 6.5f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -58,7 +53,7 @@ public class SpawnManager : MonoBehaviour
         ScorePickupCount = FindObjectsOfType<Pickup_Score>().Length;
         BonusPickupCount = FindObjectsOfType<Pickup_Shield>().Length + FindObjectsOfType<Pickup_Nuke>().Length + FindObjectsOfType<Pickup_SlowMo>().Length;
 
-        if (ScorePickupCount == 0 && GameManager.Instance.IsGameOver() == true)
+        if (GameManager.Instance.state == GameManager.GameState.GameScreen && ScorePickupCount == 0)
         {
             Instantiate(scorePickupPrefab, GeneratePickupSpawnLocation(), scorePickupPrefab.transform.rotation);
 
@@ -66,7 +61,7 @@ public class SpawnManager : MonoBehaviour
             SpawnEnemyWave();
         }
 
-        if (BonusPickupCount == 0 && GameManager.Instance.IsGameOver() == true)
+        if (GameManager.Instance.state == GameManager.GameState.GameScreen && BonusPickupCount == 0)
         {
             int rand = Random.Range(1, 4);
             if (rand == 1)
